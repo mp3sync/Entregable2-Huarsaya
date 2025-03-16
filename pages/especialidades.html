@@ -50,11 +50,34 @@ href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         </nav>
     </header>
 
-    <h1>Simulador de Turnos Médicos</h1>
-    <p>Este simulador permite a los pacientes elegir una especialidad médica y recibir un turno con un doctor disponible.</p>
+    
    
     <main>
         
+
+       
+            <section class="container-section">
+              <h1>Simulador de Turnos Médicos</h1>
+              <p>Este simulador permite a los pacientes elegir una especialidad médica y recibir un turno con un doctor disponible.</p>
+          
+         
+              <form id="formTurnos" class="form-turnos">
+                <label for="especialidadSelect">Elige una especialidad:</label>
+                <select id="especialidadSelect" class="form-select">
+                  <!-- Opciones dinámicas desde JS -->
+                </select>
+                <button type="submit" class="btn btn-primary mt-3">Agendar Turno</button>
+              </form>
+          
+              <!-- Turnos agendados -->
+              <section id="turnosAgendados" class="mt-5">
+                <h2>Turnos Agendados</h2>
+                <ul id="listaTurnos" class="list-group"></ul>
+              </section>
+            </section>
+      
+
+
 
         <section class="container-section">
             <h2 class="animate__animated animate__headShake">Te presentamos nuestras especialidades más destacadas</h2>
