@@ -552,9 +552,6 @@ p {
   margin: 0;
 }
 
-
-
-
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -760,19 +757,75 @@ a {
 }
 
 
-.form-turnos {
+form {
+  background-color: #fff;
+  padding: 20px;
+  margin: 0 auto 20px;
   max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+form input,
+form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #3a993d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: #3a993d;
+}
+
+#listaTurnos {
+  max-width: 600px;
   margin: 0 auto;
 }
 
-#turnosAgendados {
-  max-width: 500px;
-  margin: 0 auto;
+.turno {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-left: 5px solid #3a993d;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.list-group-item {
-  font-size: 1rem;
+.turno p {
+  margin-bottom: 8px;
 }
 
+.turno button {
+  background-color: #971d27;
+  border: none;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.turno button:hover {
+  background-color: #971d27;
+}
 
 /*# sourceMappingURL=main.css.map */
