@@ -112,9 +112,13 @@ class TurnosApp {
     });
   }
 
+  guardarTurnos() { // Nueva función agregada
+    localStorage.setItem('turnos', JSON.stringify(this.turnos));
+  }
+
   eliminarTurno(turnoAEliminar) {
     this.turnos = this.turnos.filter(turno => turno !== turnoAEliminar);
-    this.guardarTurnos();
+    this.guardarTurnos(); // Ahora llama correctamente a la función
     this.mostrarTurnos();
   }
 }
