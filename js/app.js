@@ -8,19 +8,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const confirmacionCitas = document.getElementById("confirmacion-citas");
     const botonConfirmar = document.getElementById("confirmar-citas");
 
-    // Obtiene la fecha actual
+   
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); 
     const yyyy = today.getFullYear();
 
-    // Formatea la fecha en formato YYYY-MM-DD
+  
     const formattedDate = yyyy + '-' + mm + '-' + dd;
 
-    // Asigna la fecha actual como la fecha mínima para el input
+ 
     document.getElementById('dia').setAttribute('min', formattedDate);
 
-    // El resto del código sigue igual...
+
     fetch("../data/data.json")
     .then((res) => res.json())
     .then((especialidades) => {
@@ -110,20 +110,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const fecha = document.getElementById("dia").value;
         const rangoHora = selectHora.value;
     
-        // Validar que se haya seleccionado fecha y hora
+       
         if (!fecha || !rangoHora) {
             Swal.fire("¡Error!", "Debes seleccionar fecha y hora", "error");
             return;
         }
     
-        // Validar que la fecha seleccionada no sea una fecha pasada
-        const hoy = new Date().toISOString().split("T")[0]; // Obtener fecha actual en formato YYYY-MM-DD
+    
+        const hoy = new Date().toISOString().split("T")[0]; 
         if (fecha < hoy) {
             Swal.fire("¡Error!", "No puedes seleccionar una fecha pasada", "error");
             return;
         }
     
-        // Verificar si ya existe una cita en la misma fecha y hora
+   
         const citaExistente = citasSeleccionadas.some(
             cita => cita.fecha === fecha && cita.rangoHora === rangoHora
         );
@@ -132,7 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
     
-        // Guardar la información seleccionada en el localStorage
         localStorage.setItem("fechaSeleccionada", fecha);
         localStorage.setItem("horaSeleccionada", rangoHora);
     
@@ -143,28 +142,28 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("especialidadesSeleccionadas", JSON.stringify(especialidadesSeleccionadas));
         localStorage.setItem("rangosHorasSeleccionados", JSON.stringify(rangosHorasSeleccionados));
     
-        // Mostrar las citas seleccionadas
+       
         mostrarCitasSeleccionadas();
         formularioTurno.reset();
         formularioTurno.style.display = "none";
-        selectEspecialidad.value = ""; // Resetear el campo de especialidad
+        selectEspecialidad.value = ""; 
     });
     
 
     function mostrarCitasSeleccionadas() {
-        // Limpiar la lista antes de volver a renderizar las citas
+       
         while (listaCitas.firstChild) {
             listaCitas.removeChild(listaCitas.firstChild);
         }
     
-        // Verificar si hay citas seleccionadas
+       
         console.log("Citas seleccionadas:", citasSeleccionadas);
     
-        // Crear el contenedor para las citas
+        
         const contenedorCitas = document.createElement("div");
         contenedorCitas.classList.add("citas-recuadro");
     
-        // Iterar sobre las citas seleccionadas y agregarlas al contenedor
+      
         citasSeleccionadas.forEach((cita, index) => {
             const li = document.createElement("li");
     
@@ -180,36 +179,36 @@ document.addEventListener("DOMContentLoaded", () => {
             horaSpan.textContent = cita.rangoHora;
             li.appendChild(horaSpan);
     
-            // Crear el botón "X" para eliminar la cita
+           
             const botonEliminar = document.createElement("button");
             botonEliminar.textContent = "X";
             botonEliminar.classList.add("btn-eliminar");
             botonEliminar.addEventListener("click", () => {
-                // Eliminar la cita del array
+               
                 const citaEliminada = citasSeleccionadas[index];
                 citasSeleccionadas.splice(index, 1);
 
-                // Eliminar de rangosHorasSeleccionados
+                
                 rangosHorasSeleccionados = rangosHorasSeleccionados.filter(hora => hora !== citaEliminada.rangoHora);
 
-                // Eliminar de especialidadesSeleccionadas
+               
                 especialidadesSeleccionadas = especialidadesSeleccionadas.filter(
                 especialidad => especialidad.nombre !== citaEliminada.especialidad
                 );
 
-                // Actualizar localStorage
+            
                 localStorage.setItem("rangosHorasSeleccionados", JSON.stringify(rangosHorasSeleccionados));
                 localStorage.setItem("especialidadesSeleccionadas", JSON.stringify(especialidadesSeleccionadas));
-                // Actualizar el localStorage
+              
                 localStorage.setItem("citasSeleccionadas", JSON.stringify(citasSeleccionadas));
             
-                // Volver a mostrar las citas actualizadas
+               
                 mostrarCitasSeleccionadas();
             
-                // Habilitar las horas nuevamente
+             
                 habilitarHoras();
             
-                // Habilitar las especialidades nuevamente
+             
            selectEspecialidad.querySelectorAll("option").forEach(option => {
     option.disabled = especialidadesSeleccionadas.some(
         especialidad => especialidad.nombre === option.value
@@ -223,7 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
             contenedorCitas.appendChild(li);
         });
     
-        // Agregar las citas al contenedor en el HTML
+      
         listaCitas.appendChild(contenedorCitas);
         confirmacionCitas.style.display = citasSeleccionadas.length > 0 ? "block" : "none";
     }
@@ -237,17 +236,17 @@ document.addEventListener("DOMContentLoaded", () => {
             "15:00 - 16:00"
         ];
     
-        // Limpiar las opciones actuales
+     
         while (selectHora.firstChild) {
             selectHora.removeChild(selectHora.firstChild);
         }
     
-        // Deshabilitar las horas ya seleccionadas
+      
         rangosHorasDisponibles.forEach(rango => {
             const option = document.createElement("option");
             option.value = rango;
             option.textContent = rango;
-            option.disabled = rangosHorasSeleccionados.includes(rango); // Deshabilitar si la hora ya está seleccionada
+            option.disabled = rangosHorasSeleccionados.includes(rango); 
             selectHora.appendChild(option);
         });
     }
@@ -278,7 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
             contenedorResumen.appendChild(citaDiv);
         });
     
-        // Crear el contenedor principal para el Swal
+    
         const contenidoSwal = document.createElement("div");
 contenidoSwal.style.fontSize = "16px";
 contenidoSwal.style.marginBottom = "15px";
@@ -316,7 +315,7 @@ citasContainer.appendChild(encabezado);
 citasContainer.appendChild(contenedorResumen);
 contenidoSwal.appendChild(citasContainer);
 
-// Crear un nuevo párrafo para la pregunta
+
 const pregunta = document.createElement("p");
 pregunta.textContent = "¿Deseas continuar?";
 contenidoSwal.appendChild(pregunta);
